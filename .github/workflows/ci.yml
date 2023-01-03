@@ -68,12 +68,3 @@ jobs:
       - name: Tests
         run: cargo test --verbose
 
-      - name: Benches
-        if: matrix.benches
-        run: cargo bench
-
-      - name: Run example simple
-        run: cargo run --example simple
-
-      - name: Run example multi-file
-        run: cargo run --example multi-file-example

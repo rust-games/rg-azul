@@ -1,19 +1,28 @@
 [package]
-name = "rust-template-project"
-version = "0.1.0"
+name = "rg-azul"
+version = "0.0.1"
 authors = ["Valentin Colin <valentin.colin78@gmail.com>"]
 edition = "2021"
-description = "This project serves as the basis for future new projects"
-readme = "README.md"
-homepage = "https://github.com/ValentinColin/rust-template-project.git"
-repository = "https://github.com/ValentinColin/rust-template-project.git"
+description = "Board game azul (first edition"
+homepage = "https://github.com/rust-games/rg-azul.git"
+repository = "https://github.com/rust-games/rg-azul.git"
 license = "MIT"
-# licence-file = "LICENSE"
-keywords = ["template"]
+keywords = ["game", "2d", "board", "network"]
 
 [dependencies]
-clippy = {version = "0.0.21", optional = true}
+log = "0.4"
+env_logger = "0.10.0"
+# thiserror = "1.0.38"
+# unicode-segmentation = "1.10.0"
+bevy = "0.9.1"
 
-[features]
-default = []
-dev = ["clippy"]
+[profile.release]
+opt-level = 3
+debug = false
+
+[profile.dev]
+opt-level = 3
+debug = true
+
+[profile.test]
+opt-level = 3

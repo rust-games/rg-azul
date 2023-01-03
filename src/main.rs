@@ -1,15 +1,5 @@
 //! Description of this crate
 
-// Careful to the syntax:
-//
-// | Documentation | Inner         | Outer         |
-// |---------------|:-------------:|:-------------:|
-// | Line          | //! blabla    | /// blabla    |
-// | Block         | /*! blabla */ | /** blabla */ |
-//
-// - Inner attribute: #![attr]
-// - Outer attribute: #[attr]
-
 // Good practice: use these attributes
 #![deny(
     missing_docs,
@@ -23,10 +13,8 @@
     unused_qualifications
 )]
 
-mod lib;
-use crate::lib::lib_hello;
 
-/// This function returns the greeting: `Hello, world!`
+/// This function returns the greeting: `Hello world!`
 fn main() {
-    lib_hello();
+    println!("Hello world!");
 }

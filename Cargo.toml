@@ -1,20 +1,11 @@
-[package]
-name = "rg-azul"
-version = "0.0.1"
-authors = ["Valentin Colin <valentin.colin78@gmail.com>"]
-edition = "2021"
-description = "Board game azul (first edition"
-homepage = "https://github.com/rust-games/rg-azul.git"
-repository = "https://github.com/rust-games/rg-azul.git"
-license = "MIT"
-keywords = ["game", "2d", "board", "network"]
-
-[dependencies]
-log = "0.4"
-env_logger = "0.10.0"
-# thiserror = "1.0.38"
-# unicode-segmentation = "1.10.0"
-bevy = "0.9.1"
+[workspace]
+members = [
+    "client",
+    "server",
+    "common",
+    "bevy-test"
+]
+resolver = "2" # Important! wgpu/Bevy needs this!
 
 [profile.release]
 opt-level = 3

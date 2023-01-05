@@ -1,0 +1,17 @@
+[package]
+name = "rg-azul-server"
+version = "0.0.1"
+authors = ["Valentin Colin <valentin.colin78@gmail.com>"]
+edition = "2021"
+description = "Server side of azul game (first edition)"
+homepage = "https://github.com/rust-games/rg-azul.git"
+repository = "https://github.com/rust-games/rg-azul.git"
+license = "MIT"
+keywords = ["game", "2d", "board", "network", "server"]
+
+[dependencies]
+log = "0.4"
+env_logger = "0.10.0"
+thiserror = "1"
+bevy = "0.9"
+bevy_renet = "0.0.6"

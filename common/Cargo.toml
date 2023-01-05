@@ -1,0 +1,12 @@
+[package]
+name = "rg-azul-common"
+version = "0.0.1"
+authors = ["Valentin Colin <valentin.colin78@gmail.com>"]
+edition = "2021"
+description = "Library of azul game (first edition)"
+homepage = "https://github.com/rust-games/rg-azul.git"
+repository = "https://github.com/rust-games/rg-azul.git"
+license = "MIT"
+
+[dependencies]
+thiserror = "1"

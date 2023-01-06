@@ -1,18 +1,20 @@
 use bevy::prelude::*;
 use bevy_renet::{
     renet::{
-        ClientAuthentication, DefaultChannel, RenetClient, RenetConnectionConfig, RenetError, RenetServer, ServerAuthentication,
-        ServerConfig, ServerEvent,
+        ClientAuthentication, DefaultChannel, RenetClient, RenetConnectionConfig, RenetError,
+        RenetServer, ServerAuthentication, ServerConfig, ServerEvent,
     },
     run_if_client_connected, RenetClientPlugin, RenetServerPlugin,
 };
 
+use bevy::input::mouse::MouseButtonInput;
+use std::net::TcpListener;
 use std::time::SystemTime;
 use std::{collections::HashMap, net::UdpSocket};
-use std::net::TcpListener;
-use bevy::input::mouse::MouseButtonInput;
 
 use serde::{Deserialize, Serialize};
+
+mod graphics_systems;
 
 const PROTOCOL_ID: u64 = 7;
 
@@ -20,7 +22,7 @@ const PLAYER_MOVE_SPEED: f32 = 1.0;
 
 #[derive(Debug, Default, Serialize, Deserialize, Component, Resource)]
 struct PlayerInput {
-    mouse_click: Option<(f32, f32)>
+    mouse_click: Option<(f32, f32)>,
 }
 
 #[derive(Debug, Component)]
@@ -37,7 +39,9 @@ fn new_renet_client() -> RenetClient {
     let server_addr = "127.0.0.1:5000".parse().unwrap();
     let socket = UdpSocket::bind("127.0.0.1:0").unwrap();
     let connection_config = RenetConnectionConfig::default();
-    let current_time = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
+    let current_time = SystemTime::now()
+        .duration_since(SystemTime::UNIX_EPOCH)
+        .unwrap();
     let client_id = current_time.as_millis() as u64;
     let authentication = ClientAuthentication::Unsecure {
         client_id,
@@ -50,22 +54,14 @@ fn new_renet_client() -> RenetClient {
 
 fn main() {
     let mut app = App::new();
-    app.add_plugins(
-        DefaultPlugins
-            .set(WindowPlugin {
-                window: WindowDescriptor {
-                    width: 700.0,
-                    height: 700.0,
-                    ..default()
-                },
-                ..default()
-            })
-            .set(AssetPlugin {
-                //asset_folder: "../../assets".to_string(),
-                watch_for_changes: true,
-                ..default()
-            }),
-    );
+    app.add_plugins(DefaultPlugins.set(WindowPlugin {
+        window: WindowDescriptor {
+            width: 700.0,
+            height: 700.0,
+            ..default()
+        },
+        ..default()
+    }));
     app.insert_resource(Lobby::default());
 
     app.add_plugin(RenetClientPlugin::default());
@@ -128,7 +124,11 @@ fn client_sync_players(
 }
 
 /// set up a simple 3D scene
-fn setup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<StandardMaterial>>) {
+fn setup(
+    mut commands: Commands,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<StandardMaterial>>,
+) {
     // plane
     commands.spawn(PbrBundle {
         mesh: meshes.add(Mesh::from(shape::Plane { size: 5.0 })),
@@ -152,13 +152,17 @@ fn setup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials
     });
 }
 
-fn player_input_system(mouse_input: Res<Input<MouseButton>>, mut player_input: ResMut<PlayerInput>) {
+fn player_input_system(
+    mouse_input: Res<Input<MouseButton>>,
+    mut player_input: ResMut<PlayerInput>,
+) {
     player_input.mouse_click = None;
     if mouse_input.pressed(MouseButton::Left) {
-        player_input.mouse_click = mouse_input.
+        //player_input.mouse_click = mouse_input.
     }
     player_input.left = keyboard_input.pressed(KeyCode::A) || keyboard_input.pressed(KeyCode::Left);
-    player_input.right = keyboard_input.pressed(KeyCode::D) || keyboard_input.pressed(KeyCode::Right);
+    player_input.right =
+        keyboard_input.pressed(KeyCode::D) || keyboard_input.pressed(KeyCode::Right);
     player_input.up = keyboard_input.pressed(KeyCode::W) || keyboard_input.pressed(KeyCode::Up);
     player_input.down = keyboard_input.pressed(KeyCode::S) || keyboard_input.pressed(KeyCode::Down);
 }

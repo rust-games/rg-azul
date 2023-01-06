@@ -64,10 +64,10 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                                         color: Color::WHITE,
                                     },
                                 )
-                                    .with_style(Style {
-                                        margin: UiRect::all(Val::Px(5.0)),
-                                        ..default()
-                                    }),
+                                .with_style(Style {
+                                    margin: UiRect::all(Val::Px(5.0)),
+                                    ..default()
+                                }),
                             );
                         });
                 });
@@ -94,15 +94,15 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                                 color: Color::WHITE,
                             },
                         )
-                            .with_style(Style {
-                                size: Size::new(Val::Undefined, Val::Px(25.)),
-                                margin: UiRect {
-                                    left: Val::Auto,
-                                    right: Val::Auto,
-                                    ..default()
-                                },
+                        .with_style(Style {
+                            size: Size::new(Val::Undefined, Val::Px(25.)),
+                            margin: UiRect {
+                                left: Val::Auto,
+                                right: Val::Auto,
                                 ..default()
-                            }),
+                            },
+                            ..default()
+                        }),
                     );
                     // List with hidden overflow
                     parent
@@ -145,16 +145,16 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                                                     color: Color::WHITE,
                                                 },
                                             )
-                                                .with_style(Style {
-                                                    flex_shrink: 0.,
-                                                    size: Size::new(Val::Undefined, Val::Px(20.)),
-                                                    margin: UiRect {
-                                                        left: Val::Auto,
-                                                        right: Val::Auto,
-                                                        ..default()
-                                                    },
+                                            .with_style(Style {
+                                                flex_shrink: 0.,
+                                                size: Size::new(Val::Undefined, Val::Px(20.)),
+                                                margin: UiRect {
+                                                    left: Val::Auto,
+                                                    right: Val::Auto,
                                                     ..default()
-                                                }),
+                                                },
+                                                ..default()
+                                            }),
                                         );
                                     }
                                 });

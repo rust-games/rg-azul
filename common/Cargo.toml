@@ -9,4 +9,7 @@ repository = "https://github.com/rust-games/rg-azul.git"
 license = "MIT"
 
 [dependencies]
+log = "0.4"
 thiserror = "1"
+bevy = "0.9"
+bevy_renet = "0.0.6"
